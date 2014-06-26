@@ -66,7 +66,38 @@ class Mashable
 # Step 6: Print out all the channels in the hash channels 
         puts "----------------"
         channels.each do |key|
-        	puts key
+#        	puts key.class
+            puts "<><><><><><><><>"
+            puts key[0]
+            puts "<><><><><><><><>"
+#            puts channels.keys()
+            array.each do |dustbunnies|
+              stringA = dustbunnies['channel']
+              # puts "Test0  #{stringA.class}"
+              # puts "TestA  /#{dustbunnies['channel']}/"
+              # puts "TestB  /#{key[0].chomp.to_s}/"
+              stringB = key[0].chomp.to_s
+              # puts "Test1  #{stringB.class}"
+              # my_match = /dustbunnies['channel'].chomp.to_s/.match(stringB)
+              # puts "my_match = #{my_match}"
+              # puts "my_match = #{$&}"
+              # puts "my_match = #{$1}"
+              # if ( stringA =~ /^Watercooler$/ )
+              #   puts " I got a match.  I got a match.  I got a match.  I got a match."
+              # end
+# The following IF-block compares the two strings containing channels and sees if they are a match or not. 
+# THIS COMPARISON DID NOT WORK!!!!  WHY????
+              # if ( stringA =~ /stringB/ )
+              #   puts "Sovereign Class Battlestar Warp, Transwarp, FTL Capable; armed with KEWs, phasers, photon and quantum torpedos"
+              #   puts "#{dustbunnies['title']}"
+              # end
+
+# The following IF-block compares the two strings containing channels and sees if they are a match or not.
+              if [ stringA ].include?( stringB )
+                puts "#{dustbunnies['title']}"
+              end
+
+            end
         end
         puts "----------------"
 
