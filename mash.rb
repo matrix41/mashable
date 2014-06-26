@@ -105,6 +105,36 @@ class Mashable
     end # end show_articles_grouped_by_channel function
 
     def show_author_plus_number_of_articles
+        response = HTTParty.get('http://gist.githubusercontent.com/thebucknerlife/ce3598eb76deaec8ae4c/raw/ba25f9a6ed6d1fa9bbc3a41b1e85e8900d6d3e39/mashable.json', verify: false)
+
+        hash = JSON.parse(response) 
+#        puts "hash count = #{hash.count}"
+        array = hash['new']
+        author_hash = {}
+ #       puts "author_hash count = #{author_hash.count}"
+        array.each do |article|
+#          puts article['author']
+#          temp = article['author']
+            if !author_hash.has_key? ( article['author'] )
+#              author_hash["#{article['author']}"] = nil
+              author_hash["#{article['author']}"] = 1
+            else
+#              puts "Sovereign Class Battlestar Warp, Transwarp, FTL Capable; armed with KEWs, phasers, photon and quantum torpedos"
+#              puts "#{article['author']} = #{author_hash["#{article['author']}"]}"
+              author_hash["#{article['author']}"] = author_hash["#{article['author']}"] + 1
+            end
+        end # end EACH-DO block
+#        puts "author_hash count = #{author_hash.count}"
+
+# Now print out entire author_hash
+        puts "Author            # of articles"
+        puts "----------------  -------------"
+        author_hash.each do |key|
+#          puts key[0], key[1]
+          puts "#{key[0]}       #{key[1]}"
+        end
+
+
     end # end show_author_plus_number_of_articles function 
 
     def show_authors_show_total_social_shares
@@ -119,7 +149,11 @@ show_stuff = Mashable.new
 puts "-------"
 # show_stuff.show_article_show_total_social_shares
 puts "-------"
-show_stuff.show_articles_grouped_by_channel
+# show_stuff.show_articles_grouped_by_channel
+puts "-------"
+show_stuff.show_author_plus_number_of_articles
+puts "-------"
+# show_stuff.show_authors_show_total_social_shares
 puts "-------"
 
 
