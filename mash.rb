@@ -39,10 +39,37 @@ class Mashable
 
         hash = JSON.parse(response) 
         array = hash['new']
-
+        channels = {}
+# This EACH-DO loop is supposed to populate the channels hash 
         array.each do |article|
-        	puts article['channel']
+#        	puts "<><><><><>"
+# Step 1: This line will print the current channel 
+#        	puts article['channel']
+# Step 2: This line will assign the channel to a temp variable 
+#        	temp = article['channel'].chomp().to_s()
+#            channels.add(article['channel']) if article.has_key? "#{article['channel']}"
+#            channels = [ {:key => article['channel']} ]
+# Step 3: This line will print the temp variable 
+#            puts "temp = #{temp}"
+# Step 4: In this IF-block, I am trying to add a new key to the hash 
+#            if !channels.has_key? ( "#{temp}" )
+            if !channels.has_key? ( article['channel'] )
+#              puts "TT: #{temp}"
+# Step 5: This line will assign a new key to the hash channels 
+#              channels = { "#{article['channel']}" => nil }
+              channels["#{article['channel']}"] = nil
+            end
+# Step 6: This line will print the current contents of hash channels
+#            puts channels
         end
+
+# Step 6: Print out all the channels in the hash channels 
+        puts "----------------"
+        channels.each do |key|
+        	puts key
+        end
+        puts "----------------"
+
 
     end # end show_articles_grouped_by_channel function
 
