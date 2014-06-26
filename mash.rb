@@ -133,11 +133,36 @@ class Mashable
 #          puts key[0], key[1]
           puts "#{key[0]}       #{key[1]}"
         end
-
-
     end # end show_author_plus_number_of_articles function 
 
     def show_authors_show_total_social_shares
+        response = HTTParty.get('http://gist.githubusercontent.com/thebucknerlife/ce3598eb76deaec8ae4c/raw/ba25f9a6ed6d1fa9bbc3a41b1e85e8900d6d3e39/mashable.json', verify: false)
+
+        hash = JSON.parse(response) 
+#        puts "hash count = #{hash.count}"
+        array = hash['new']
+        author_hash = {}
+ #       puts "author_hash count = #{author_hash.count}"
+        array.each do |article|
+#          puts article['author']
+#          temp = article['author']
+            if !author_hash.has_key? ( article['author'] )
+#              author_hash["#{article['author']}"] = nil
+#              puts article['shares']['total']
+              author_hash["#{article['author']}"] = article['shares']['total']
+            else
+#              puts "#{article['author']} = #{author_hash["#{article['author']}"]}"
+              author_hash["#{article['author']}"] = author_hash["#{article['author']}"] + article['shares']['total']
+            end
+        end # end EACH-DO block
+
+# Now print out entire author_hash
+        puts "Author            Total # of shares"
+        puts "----------------  -----------------"
+        author_hash.each do |key|
+#          puts key[0], key[1]
+          puts "#{key[0]}       #{key[1]}"
+        end
     end # end show_authors_show_total_social_shares function 
 
 
@@ -153,7 +178,7 @@ puts "-------"
 puts "-------"
 show_stuff.show_author_plus_number_of_articles
 puts "-------"
-# show_stuff.show_authors_show_total_social_shares
+show_stuff.show_authors_show_total_social_shares
 puts "-------"
 
 
