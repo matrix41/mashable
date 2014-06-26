@@ -99,9 +99,6 @@ class Mashable
 
             end
         end
-        puts "----------------"
-
-
     end # end show_articles_grouped_by_channel function
 
     def show_author_plus_number_of_articles
@@ -166,23 +163,48 @@ class Mashable
     end # end show_authors_show_total_social_shares function 
 
 
-end # end WorldCupStatus class 
+end # end Mashable class 
 
 
+# Instantiate new object from Mashable class 
 show_stuff = Mashable.new
-# show_stuff.show_title_show_short_url
-puts "-------"
-# show_stuff.show_article_show_total_social_shares
-puts "-------"
-# show_stuff.show_articles_grouped_by_channel
-puts "-------"
-show_stuff.show_author_plus_number_of_articles
-puts "-------"
-show_stuff.show_authors_show_total_social_shares
-puts "-------"
 
-
-
-cool_stuff = Mashable.new
-
+begin
+  puts " "
+  puts "+=============================================================+"
+  puts "|                        Mashable Menu                        |" 
+  puts "+=============================================================+"
+  puts "|  1. Show each article title + short URL                     |"
+  puts "|  2. Show each article and the total social share            |"
+  puts "|  3. Show articles grouped by channel                        |"
+  puts "|  4. Show each author and the numbers of articles they wrote |"
+  puts "|  5. Show authors by aggregate total social shares           |"
+  puts "|  6. Exit                                                    |"
+  puts "+=============================================================+"
+  puts " "
+  user_input = gets.chomp.to_i()
+  case user_input
+  when 1
+#    puts "It's 1"
+    show_stuff.show_title_show_short_url
+  when 2
+#    puts "It's 2"
+    show_stuff.show_article_show_total_social_shares
+  when 3
+#    puts "It's 3"
+    show_stuff.show_articles_grouped_by_channel
+  when 4
+#    puts "It's 4"
+    show_stuff.show_author_plus_number_of_articles
+  when 5
+#    puts "It's 5"
+    show_stuff.show_authors_show_total_social_shares
+  when 6
+#    puts "It's 6"
+    break
+  else
+    puts "You gave me #{user_input} -- I have no idea what to do with that."
+    break
+  end
+end while user_input != 6
 
