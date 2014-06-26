@@ -33,17 +33,20 @@ class Mashable
         hash = JSON.parse(response) 
         array = hash['new']
         channels = {}
-# This EACH-DO loop is supposed to populate the channels hash 
+# This EACH-DO loop will populate the channels hash with a unique channel
         array.each do |article|
-# Step 4: In this IF-block, I am trying to add a new key to the hash 
+# In this IF-block, I am trying to add a new key to the hash 
             if !channels.has_key? ( article['channel'] )
-# Step 5: This line will assign a new key to the hash channels 
-#              channels = { "#{article['channel']}" => nil }
+# This line will assign a new key to the hash channels 
+#             channels = { "#{article['channel']}" => nil }
               channels["#{article['channel']}"] = nil
             end
         end
 
-# Step 6: Print out all the channels in the hash channels 
+# The nested EACH-DO loop below will loop through each unique channel.  
+# At each channel, the algorithm will loop through the entire mashable 
+# array hash, looking for a match to channel.  When there is a match, 
+# it will print out an article title. 
         puts "----------------"
         channels.each do |key|
             puts "<><><><><><><><>"
@@ -56,7 +59,6 @@ class Mashable
 # channels and sees if they are a match or not. 
 # THIS COMPARISON DID NOT WORK!!!!  WHY????
               # if ( stringA =~ /stringB/ )
-              #   puts "Sovereign Class Battlestar Warp, Transwarp, FTL Capable; armed with KEWs, phasers, photon and quantum torpedos"
               #   puts "#{dustbunnies['title']}"
               # end
 
@@ -77,6 +79,11 @@ class Mashable
         array = hash['new']
         author_hash = {}
 
+# The EACH-DO loop below will loop through all the authors in the 
+# mashable hash.  The IF-block will check if that author name is 
+# already in author_hash.  If it is not, then add the author as 
+# a new key and give it value = 1.  If it is, then simply add 1 
+# to the existing value associated with that author.    
         array.each do |article|
             if !author_hash.has_key? ( article['author'] )
               author_hash["#{article['author']}"] = 1
@@ -101,6 +108,12 @@ class Mashable
         array = hash['new']
         author_hash = {}
 
+# The EACH-DO loop below will loop through all the authors in the 
+# mashable hash.  The IF-block will check if that author name is 
+# already in author_hash.  If it is not, then add the author as 
+# a new key and assign it a hash value equal to the total social 
+# shares.  If it is, then simply add the total social shares to 
+# the existing value associated with that author.    
         array.each do |article|
             if !author_hash.has_key? ( article['author'] )
               author_hash["#{article['author']}"] = article['shares']['total']
@@ -122,6 +135,7 @@ end # end Mashable class
 # Instantiate new object from Mashable class 
 show_stuff = Mashable.new
 
+# Begin loop
 begin
   puts " "
   puts "+=============================================================+"
@@ -154,10 +168,10 @@ begin
     show_stuff.show_authors_show_total_social_shares
   when 6
 #    puts "It's 6"
-    break
+    break # exit out of program 
   else
     puts "You gave me #{user_input} -- I have no idea what to do with that."
-    break
+    break # exit out of program 
   end
 end while user_input != 6
 
